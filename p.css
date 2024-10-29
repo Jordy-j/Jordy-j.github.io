@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    text-align: center;
+    color: #28a745; /* Color verde para el encabezado */
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.6; /* Espaciado entre líneas */
+    color: #555; /* Color del texto */
+    margin: 10px 0; /* Margen superior e inferior */
+}
+
+ul, ol {
+    margin-left: 20px; /* Indentación para listas */
+    margin-bottom: 20px; /* Margen inferior */
+}
+
+li {
+    margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+}
+
+strong {
+    color: #333; /* Color para el texto en negrita */
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px; /* Espaciado superior */
+    color: #777; /* Color del pie de página */
+}
+.volver-boton {
+    display: inline-block;
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor de mano */
+    transition: background-color 0.3s; /* Transición suave */
+    margin-top: 20px; /* Espaciado superior */
+}
+
+.volver-boton:hover {
+    background-color: #04c020; /* Color de fondo al pasar el mouse */
+}

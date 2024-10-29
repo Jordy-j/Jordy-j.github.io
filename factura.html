@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <link rel="stylesheet" href="factura.css"> 
+</head>
+<body>
+    <h1>Factura</h1>
+    <div id="factura"></div>
+    <a href="index.html" class="volver-boton">Volver a la página principal</a>
+    
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let nombre = params.get('nombre');
+        let cupones = params.get('cupones');
+        let totalInicial = parseFloat(params.get('totalInicial'));
+        let descuento = parseFloat(params.get('descuento'));
+        let iva = parseFloat(params.get('iva'));
+        let totalAPagar = parseFloat(params.get('totalAPagar'));
+
+        let factura = `
+            <h2>Factura de Compra</h2>
+            <p>Nombre del cliente: ${nombre}</p>
+            <h3>Cupones adquiridos:</h3>
+            <p>${cupones}</p>
+            <h3>DETALLE DE LA COMPRA</h3>
+            <p>Total inicial a pagar: $${totalInicial.toFixed(2)}</p>
+            <p>Descuento otorgado: $${descuento.toFixed(2)}</p>
+            <p>Total en concepto de IVA: $${iva.toFixed(2)}</p>
+            <p>Total a pagar: $${totalAPagar.toFixed(2)}</p>
+        `;
+
+        document.getElementById('factura').innerHTML = factura; // Insertar la factura en el DOM
+    </script>
+</body>
+</html>
+

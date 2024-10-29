@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de Cupones</title>
+    <link rel="stylesheet" href="Ejercicio7.css"> 
+</head>
+<body>
+    <a href="index.html" class="volver-boton">Volver a la página principal</a>
+    <h1>Compra de Cupones</h1>
+    <div style="text-align: center;">
+        <img src="pagapoco.png" />
+    </div>
+    
+    <form id="form" onsubmit="return generarFactura(event);">
+        <label for="nombre">Nombre del cliente:</label>
+        <input type="text" id="nombre" required><br>
+
+        <label>Selecciona cupones:</label><br>
+        <div class="cupon-container">
+            <input type="checkbox" id="cupon1" value="40">
+            <label for="cupon1">Restaurante Benihana - $40</label>
+            <input type="number" id="cantidad1" min="0" value="0" style="width: 50px;">
+        </div>
+        <div class="cupon-container">
+            <input type="checkbox" id="cupon2" value="60">
+            <label for="cupon2">Restaurante Bennigans - $60</label>
+            <input type="number" id="cantidad2" min="0" value="0" style="width: 50px;">
+        </div>
+        <div class="cupon-container">
+            <input type="checkbox" id="cupon3" value="100">
+            <label for="cupon3">Sala de belleza Vidals - $100</label>
+            <input type="number" id="cantidad3" min="0" value="0" style="width: 50px;">
+        </div>
+        <div class="cupon-container">
+            <input type="checkbox" id="cupon4" value="125">
+            <label for="cupon4">Clínica y Spa Framesi - $125</label>
+            <input type="number" id="cantidad4" min="0" value="0" style="width: 50px;">
+        </div>
+
+        <button type="submit">Comprar</button>
+    </form>
+
+    <script>
+        function generarFactura(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+
+            let nombre = document.getElementById('nombre').value;
+            let totalInicial = 0;
+            let cuponesSeleccionados = [];
+
+            // Verificar los cupones seleccionados y calcular totales
+            for (let i = 1; i <= 4; i++) {
+                let checkbox = document.getElementById(`cupon${i}`);
+                let cantidad = parseInt(document.getElementById(`cantidad${i}`).value) || 0;
+
+                if (checkbox.checked && cantidad > 0) {
+                    let costo = parseInt(checkbox.value);
+                    totalInicial += costo * cantidad;
+                    cuponesSeleccionados.push({
+                        nombre: checkbox.nextElementSibling.innerText,
+                        costo: costo,
+                        cantidad: cantidad,
+                        total: costo * cantidad
+                    });
+                }
+            }
+
+            // Cálculos
+            let descuento = totalInicial > 120 ? totalInicial * 0.20 : 0; // Descuento si total inicial > $120
+            let totalConDescuento = totalInicial - descuento;
+            let iva = totalConDescuento * 0.13;
+            let totalAPagar = totalConDescuento + iva;
+
+            // Redirigir a la página de la factura con los datos
+            let cuponesInfo = cuponesSeleccionados.map(c => `${c.nombre} - ${c.cantidad} cupon(es) a $${c.costo} cada uno`).join(', ');
+            let url = `factura.html?nombre=${encodeURIComponent(nombre)}&cupones=${encodeURIComponent(cuponesInfo)}&totalInicial=${totalInicial}&descuento=${descuento}&iva=${iva}&totalAPagar=${totalAPagar}`;
+            window.location.href = url; // Redirigir
+        }
+    </script>
+</body>
+</html>
